@@ -4,21 +4,118 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gladiol Studios - RexFlaps 404</title>
+<meta name="description" content="RexFlaps 404: game arcade satu jari. Seekor dino terbang di atas pesawat kertas. Dari Gladiol Studios, pengembang game indie Indonesia.">
 <style>
-  body { font-family: system-ui, sans-serif; background:#10151c; color:#e8edf2; margin:0; padding:48px 16px; text-align:center; }
-  main { max-width:560px; margin:0 auto; }
-  h1 { margin:0 0 8px; }
-  p { line-height:1.6; color:#b8c2cc; }
-  a.btn { display:inline-block; margin-top:20px; padding:12px 24px; background:#3ddc84; color:#10151c; text-decoration:none; border-radius:8px; font-weight:600; }
+  :root {
+    --bg1: #0b1020;
+    --bg2: #1b2a4a;
+    --ink: #eef3fb;
+    --muted: #a9b6cc;
+    --accent: #3ddc84;
+    --accent-ink: #08241a;
+    --card: rgba(255,255,255,.06);
+    --line: rgba(255,255,255,.12);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 60%, #2c4268 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .cloud {
+    position: absolute; height: 18px; border-radius: 99px;
+    background: rgba(255,255,255,.07);
+    animation: drift linear infinite;
+  }
+  .cloud.c1 { width: 140px; top: 14%; animation-duration: 60s; }
+  .cloud.c2 { width: 90px;  top: 30%; animation-duration: 85s; animation-delay: -30s; }
+  .cloud.c3 { width: 180px; top: 62%; animation-duration: 110s; animation-delay: -60s; }
+  @keyframes drift { from { left: -220px; } to { left: 110%; } }
+
+  .wrap { position: relative; max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding: 22px 0; }
+  .brand { font-weight: 800; letter-spacing: .5px; }
+  .brand span { color: var(--accent); }
+  nav a.small { color: var(--muted); text-decoration: none; font-size: 14px; }
+
+  .hero { text-align: center; padding: 40px 0 56px; }
+  .plane { width: 120px; height: auto; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 12px 18px rgba(0,0,0,.35)); }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-6deg); }
+    50%     { transform: translateY(-14px) rotate(2deg); }
+  }
+  .tag { display:inline-block; margin-top: 18px; padding: 6px 14px; border:1px solid var(--line); border-radius:99px; font-size: 13px; color: var(--muted); background: var(--card); }
+  h1 { font-size: clamp(40px, 9vw, 76px); line-height: 1.02; margin: 18px 0 12px; letter-spacing: -1px; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lead { max-width: 560px; margin: 0 auto; font-size: 18px; line-height: 1.6; color: var(--muted); }
+  .cta { margin-top: 30px; display:flex; gap: 12px; justify-content:center; flex-wrap: wrap; }
+  .btn {
+    display:inline-flex; align-items:center; gap:10px; padding: 14px 26px; border-radius: 12px;
+    background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none;
+    box-shadow: 0 10px 28px rgba(61,220,132,.25); transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(61,220,132,.35); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+  .btn svg { width: 20px; height: 20px; }
+
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; padding-bottom: 56px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; backdrop-filter: blur(6px); }
+  .card .ic { font-size: 26px; }
+  .card h3 { margin: 10px 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 15px; }
+
+  .about { text-align:center; padding: 8px 0 56px; }
+  .about h2 { font-size: 26px; margin: 0 0 10px; }
+  .about p { max-width: 560px; margin: 0 auto; color: var(--muted); line-height: 1.65; }
+
+  footer { border-top: 1px solid var(--line); padding: 24px 0 40px; text-align:center; color: var(--muted); font-size: 14px; }
+  @media (prefers-reduced-motion: reduce) { .plane, .cloud { animation: none; } }
 </style>
 </head>
 <body>
-<main>
-  <h1>Gladiol Studios</h1>
-  <p>Pengembang game indie dari Indonesia.</p>
-  <h2>RexFlaps 404</h2>
-  <p>Seekor dino terbang di atas pesawat kertas. Hindari rintangan dan pecahkan skor terbaikmu.</p>
-  <a class="btn" href="https://play.google.com/store/apps/details?id=com.heribertus.rexflaps404">Unduh di Google Play</a>
-</main>
+<div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+
+<div class="wrap">
+  <nav>
+    <div class="brand">GLADIOL <span>STUDIOS</span></div>
+    <a class="small" href="#tentang">Tentang kami</a>
+  </nav>
+
+  <header class="hero">
+    <svg class="plane" viewBox="0 0 120 90" role="img" aria-label="Pesawat kertas">
+      <polygon points="4,44 116,6 70,84 56,54" fill="#f4f7fb"/>
+      <polygon points="4,44 56,54 116,6" fill="#cfd9e8"/>
+      <polygon points="56,54 70,84 62,50" fill="#9fb0c9"/>
+    </svg>
+    <div><span class="tag">Game arcade satu jari</span></div>
+    <h1>Rex<em>Flaps</em> 404</h1>
+    <p class="lead">Seekor dino terbang di atas pesawat kertas. Ketuk, kepakkan, hindari rintangan, dan pecahkan skor terbaikmu.</p>
+    <div class="cta">
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.heribertus.rexflaps404">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l9.1-9.7-9.1-9.7zm10.2 10.9L4.9 22.2c.4.2.9.2 1.5-.1l11.5-6.6-4.1-2.3zm4.9-3.2l-4.9 2.8 4.9 2.8 2.4-1.4c.8-.5.8-1.7 0-2.2L18.7 10zM6.4 1.9c-.6-.3-1.1-.3-1.5-.1l8.9 9.1 4.1-2.3L6.4 1.9z"/></svg>
+        Unduh di Google Play
+      </a>
+      <a class="btn ghost" href="#fitur">Lihat fitur</a>
+    </div>
+  </header>
+
+  <section id="fitur" class="grid">
+    <div class="card"><div class="ic">👆</div><h3>Kontrol satu jari</h3><p>Cukup ketuk layar. Mudah dipelajari, susah dikuasai.</p></div>
+    <div class="card"><div class="ic">🏆</div><h3>Kejar skor terbaik</h3><p>Setiap percobaan singkat dan bikin penasaran untuk mengulang lagi.</p></div>
+    <div class="card"><div class="ic">🎮</div><h3>Beberapa mode</h3><p>Pilih gaya bermain yang kamu suka dan tantang dirimu sendiri.</p></div>
+    <div class="card"><div class="ic">⚡</div><h3>Ringan dan cepat</h3><p>Langsung main tanpa menunggu lama, cocok untuk sela waktu singkat.</p></div>
+  </section>
+
+  <section id="tentang" class="about">
+    <h2>Dari Indonesia, untuk pemain di mana saja</h2>
+    <p>Gladiol Studios adalah studio game indie yang dikerjakan secara mandiri. RexFlaps 404 adalah game pertama kami. Masukan dari pemain sangat berarti, jadi tinggalkan ulasan di Google Play.</p>
+  </section>
+
+  <footer>© 2026 Gladiol Studios. Semua hak dilindungi.</footer>
+</div>
 </body>
 </html>
