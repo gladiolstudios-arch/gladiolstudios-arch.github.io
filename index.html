@@ -123,26 +123,29 @@
 
   /* ---------- desert-city scene (replaces the small decorations) ---------- */
   .ground.how { padding-bottom: 0; }
-  .scene { position: relative; max-width: 1200px; margin: 28px auto 0; height: clamp(250px, 42vw, 470px); }
-  .prop { position: absolute; bottom: calc(var(--g) - 5px); }
+  .scene { position: relative; margin: 36px 0 0; padding-top: 24px; }
+  .row { display: flex; align-items: flex-end; justify-content: center; max-width: 1100px; margin: 0 auto; padding: 0 16px; position: relative; z-index: 1; }
+  .prop { position: relative; flex: none; margin-bottom: -2px; }
   .prop img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
-  .prop::before { content: ""; position: absolute; left: -8%; right: -8%; bottom: -5px; height: 10px; background: rgba(10,26,60,.28); }
-  .prop.far { opacity: .55; bottom: calc(var(--g) + 4px); }
-  .prop.far img { filter: saturate(.6) brightness(.95); }
+  .prop::before { content: ""; position: absolute; left: -6%; right: -6%; bottom: -4px; height: 8px; background: rgba(10,26,60,.3); }
+  .prop.far { z-index: 0; }
+  .prop.far img { filter: brightness(.78) saturate(.85); }
   .prop.far::before { display: none; }
-  .tower { width: clamp(96px, 17vw, 190px); }
-  .tower.main { left: 9%; }
-  .tower.far { width: clamp(56px, 8vw, 92px); }
-  .tower.far.fa { left: 2%; } .tower.far.fb { left: 33%; } .tower.far.fc { right: 20%; }
-  .cactus.big { right: 7%; width: clamp(58px, 10vw, 118px); }
-  .cactus.mid { right: 17%; width: clamp(40px, 7vw, 82px); }
-  .cactus.sm1 { left: 47%; width: clamp(30px, 5vw, 58px); }
-  .cactus.sm2 { left: 54%; width: clamp(24px, 4vw, 46px); }
+  .tower.main { width: clamp(120px, 19vw, 250px); z-index: 2; margin: 0 -1.5%; }
+  .tower.far.t1 { width: clamp(80px, 13vw, 170px); margin-right: -4%; }
+  .tower.far.t2 { width: clamp(70px, 11vw, 145px); margin-right: -2%; }
+  .tower.far.t3 { width: clamp(60px, 9vw, 120px); margin-left: 2%; }
+  .tower.far.t4 { width: clamp(76px, 12vw, 158px); margin-left: -3%; }
+  .cactus { z-index: 3; }
+  .cactus.c1 { width: clamp(34px, 5vw, 66px); margin-left: 3%; }
+  .cactus.c2 { width: clamp(46px, 7vw, 92px); margin-left: -2%; }
+  .cactus.c3 { width: clamp(62px, 10vw, 132px); margin-left: 1%; }
+  .cactus.c4 { width: clamp(30px, 4.5vw, 58px); margin-left: 1%; }
   .beacon { position: absolute; left: 20.9%; top: 15.3%; width: 4.2%; aspect-ratio: 1; min-width: 5px; background: #ff3b5c; box-shadow: 0 0 0 3px rgba(255,59,92,.35); transform: translate(-50%,-50%); animation: blink 1.4s steps(1, end) infinite; }
   @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
   html[data-theme="night"] .prop:not(.far) img { filter: brightness(1.25) drop-shadow(0 0 14px rgba(122,92,255,.65)); }
-  html[data-theme="night"] .prop.far { opacity: .4; }
-  .floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--g); background-color: var(--floor); border-top: 6px solid var(--edge);
+  html[data-theme="night"] .prop.far img { filter: brightness(.9) drop-shadow(0 0 10px rgba(122,92,255,.4)); }
+  .floor { position: relative; z-index: 4; height: var(--g); background-color: var(--floor); border-top: 6px solid var(--edge);
     background-image: radial-gradient(circle at 20% 40%, rgba(10,26,60,.35) 2.5px, transparent 3px), radial-gradient(circle at 70% 70%, rgba(10,26,60,.25) 2px, transparent 2.5px);
     background-size: 46px 30px, 31px 24px; }
 
@@ -172,7 +175,7 @@
     .b1, .b2, .b3, .b4 { grid-column: span 6; }
     .mail .wrap { grid-template-columns: 1fr; }
     .mail .ufo-big { width: 140px; }
-    .tower.far.fb, .cactus.sm2 { display: none; }
+    .tower.far.t3, .tower.far.t4, .cactus.c4 { display: none; }
     h1 { -webkit-text-stroke: 7px var(--ink); }
     h2 { -webkit-text-stroke: 6px #000; }
   }
@@ -242,14 +245,17 @@
   </div>
 
   <div class="scene" aria-hidden="true">
-    <div class="prop far tower far fa"><img src="assets/building.webp" alt=""></div>
-    <div class="prop far tower far fb"><img src="assets/building.webp" alt=""></div>
-    <div class="prop far tower far fc"><img src="assets/building.webp" alt=""></div>
-    <div class="prop tower main"><img src="assets/building.webp" alt=""><span class="beacon"></span></div>
-    <div class="prop cactus sm1"><img src="assets/cactus.webp" alt=""></div>
-    <div class="prop cactus sm2"><img src="assets/cactus.webp" alt=""></div>
-    <div class="prop cactus mid"><img src="assets/cactus.webp" alt=""></div>
-    <div class="prop cactus big"><img src="assets/cactus.webp" alt=""></div>
+    <div class="row">
+      <div class="prop far tower far t1"><img src="assets/building.webp" alt=""></div>
+      <div class="prop tower main"><img src="assets/building.webp" alt=""><span class="beacon"></span></div>
+      <div class="prop far tower far t2"><img src="assets/building.webp" alt=""></div>
+      <div class="prop cactus c1"><img src="assets/cactus.webp" alt=""></div>
+      <div class="prop far tower far t3"><img src="assets/building.webp" alt=""></div>
+      <div class="prop cactus c2"><img src="assets/cactus.webp" alt=""></div>
+      <div class="prop far tower far t4"><img src="assets/building.webp" alt=""></div>
+      <div class="prop cactus c3"><img src="assets/cactus.webp" alt=""></div>
+      <div class="prop cactus c4"><img src="assets/cactus.webp" alt=""></div>
+    </div>
     <div class="floor"></div>
   </div>
 </section>
