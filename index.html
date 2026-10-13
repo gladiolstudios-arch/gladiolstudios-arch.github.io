@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" href="assets/dino.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 <script>
   // choose day/night before first paint: saved choice, else local time
   (function () {
@@ -36,34 +36,44 @@
     --pink: #ff5fa8;
     --mint: #3de8c4;
     --violet: #7a5cff;
+    --g: 44px; /* ground band height */
   }
   html[data-theme="day"] {
     --sky-top: #5fa6ee; --sky: #9ccdfa;
-    --hero-ink: #0a1a3c; --title: #ffffff; --lead: #0a1a3c;
-    --ground: #f4e3a8; --ground-ink: #0a1a3c; --ground-dim: #3b4a6e;
-    --panel-a: #b8f5e6; --panel-b: #ffe38a; --panel-c: #ffc1de;
-    --alt-ground: #e8d08a; --edge: #0a1a3c; --foot: #0a1a3c; --foot-ink: #cfd9f3;
+    --title: #ffffff;
+    --ground: #f4e3a8; --ground-dim: #3b4a6e;
+    --panel-a: #17a38c; --panel-b: #e5882a; --panel-c: #d4437f;
+    --alt-ground: #e8d08a; --floor: #d9bd6c; --edge: #0a1a3c; --foot: #0a1a3c;
     --cloud-op: .95;
   }
   html[data-theme="night"] {
     --sky-top: #05031a; --sky: #0c092e;
-    --hero-ink: #fff0c2; --title: #fff0c2; --lead: #e6defc;
-    --ground: #1a1250; --ground-ink: #fff0c2; --ground-dim: #b9b0ee;
-    --panel-a: #2a2a8a; --panel-b: #4a2b8f; --panel-c: #7a2a74;
-    --alt-ground: #140e42; --edge: #070520; --foot: #070520; --foot-ink: #a9a0e0;
+    --title: #fff0c2;
+    --ground: #1a1250; --ground-dim: #b9b0ee;
+    --panel-a: #1f6f9a; --panel-b: #5a2fa8; --panel-c: #9a2f78;
+    --alt-ground: #140e42; --floor: #0e0933; --edge: #070520; --foot: #070520;
     --cloud-op: .12;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; font-family: var(--body); font-weight: 600; line-height: 1.6; background: var(--foot); color: var(--ground-ink); overflow-x: hidden; }
+  body { margin: 0; font-family: var(--body); font-weight: 800; line-height: 1.6; background: var(--foot); color: #fff; overflow-x: hidden; }
   :focus-visible { outline: 4px solid var(--sun); outline-offset: 3px; }
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; position: relative; }
-  .px { font-family: var(--px); font-weight: 400; }
+
+  /* ---------- all text except the title: white with black outline ---------- */
+  .logo, .tag, .lead, .btn, .hint, h2, .step h3, .step p, .b h3, .b p, .mail p, .mail .addr, footer p {
+    color: #fff;
+    -webkit-text-stroke: 4px #000;
+    paint-order: stroke fill;
+    text-shadow: 0 2px 0 #000;
+  }
+  .logo, .tag, .btn, .hint, h2, .step h3, .b h3, footer .px { font-family: var(--px); font-weight: 400; letter-spacing: 1px; }
+  .btn svg { fill: #fff; stroke: #000; stroke-width: 1.6px; paint-order: stroke fill; }
 
   /* ---------- top bar ---------- */
   .top { position: absolute; z-index: 5; left: 0; right: 0; top: 0; }
   .top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 16px; padding-bottom: 16px; }
-  .logo { font-family: var(--px); font-size: 18px; text-decoration: none; color: var(--hero-ink); letter-spacing: 1px; }
+  .logo { font-size: 18px; text-decoration: none; }
   .tools { display: flex; gap: 10px; align-items: center; }
   .chip { font: 800 14px var(--body); color: var(--ink); background: var(--sun); border: 4px solid var(--ink); padding: 6px 12px; box-shadow: 0 4px 0 var(--ink); cursor: pointer; height: 44px; display: inline-flex; align-items: center; gap: 8px; }
   .chip:active { transform: translateY(4px); box-shadow: none; }
@@ -81,14 +91,14 @@
   @keyframes drift { to { background-position: -1600px 0; } }
 
   .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.15fr .85fr; gap: 28px; align-items: center; }
-  .tag { display: inline-block; font-family: var(--px); font-size: 14px; color: var(--ink); background: var(--pink); border: 4px solid var(--ink); padding: 6px 12px; box-shadow: 0 4px 0 var(--ink); }
+  .tag { display: inline-block; font-size: 14px; background: var(--pink); border: 4px solid var(--ink); padding: 6px 12px; box-shadow: 0 4px 0 var(--ink); }
   h1 { font-family: var(--px); font-weight: 400; font-size: clamp(46px, 10vw, 104px); line-height: .95; margin: 22px 0 18px; color: var(--title); -webkit-text-stroke: 10px var(--ink); paint-order: stroke fill; text-shadow: 0 8px 0 var(--ink); letter-spacing: 1px; }
-  .lead { max-width: 28em; font-size: 19px; font-weight: 800; color: var(--lead); margin: 0 0 28px; }
+  .lead { max-width: 28em; font-size: 19px; margin: 0 0 28px; }
   .btns { display: flex; flex-wrap: wrap; gap: 16px; }
-  .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--px); font-size: 16px; text-decoration: none; color: var(--ink); padding: 14px 22px; border: 4px solid var(--ink); box-shadow: 0 6px 0 var(--ink); transition: transform .08s, box-shadow .08s; cursor: pointer; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; text-decoration: none; padding: 14px 22px; border: 4px solid var(--ink); box-shadow: 0 6px 0 var(--ink); transition: transform .08s, box-shadow .08s; cursor: pointer; }
   .btn:hover { transform: translateY(2px); box-shadow: 0 4px 0 var(--ink); }
   .btn:active { transform: translateY(6px); box-shadow: 0 0 0 var(--ink); }
-  .btn.go { background: var(--mint); } .btn.alt { background: #fff; }
+  .btn.go { background: #12a589; } .btn.alt { background: #5b4bd6; }
   .btn svg { width: 20px; height: 20px; }
 
   .stage { position: relative; display: grid; place-items: center; min-height: 280px; }
@@ -97,40 +107,59 @@
   @keyframes bob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-14px) rotate(3deg); } }
   .tile.flap { animation: flap .5s steps(6, end); }
   @keyframes flap { 0% { transform: translateY(0) rotate(-3deg); } 45% { transform: translateY(-48px) rotate(-12deg); } 100% { transform: translateY(0) rotate(-3deg); } }
-  .hint { margin-top: 20px; font-family: var(--px); font-size: 12px; color: var(--ink); background: var(--sun); border: 3px solid var(--ink); padding: 4px 10px; }
+  .hint { margin-top: 20px; font-size: 12px; background: var(--violet); border: 3px solid var(--ink); padding: 4px 10px; -webkit-text-stroke: 3px #000; }
   .ufo { position: absolute; width: 110px; right: 2%; top: -26px; image-rendering: pixelated; animation: hover 5s ease-in-out infinite; z-index: 3; }
   @keyframes hover { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-26px, 10px); } }
 
   /* ---------- ground sections ---------- */
-  .ground { position: relative; background: var(--ground); color: var(--ground-ink); border-top: 8px solid var(--edge); padding: 72px 0 84px; overflow: hidden; }
+  .ground { position: relative; background: var(--ground); border-top: 8px solid var(--edge); padding: 72px 0 84px; overflow: hidden; }
   .ground.alt { background: var(--alt-ground); }
-  h2 { font-family: var(--px); font-weight: 400; font-size: clamp(26px, 5vw, 42px); line-height: 1.1; margin: 0 0 30px; }
+  h2 { font-size: clamp(26px, 5vw, 42px); line-height: 1.1; margin: 0 0 30px; -webkit-text-stroke: 8px #000; text-shadow: 0 4px 0 #000; }
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; position: relative; z-index: 2; }
-  .step { border: 4px solid var(--ink); box-shadow: 0 8px 0 var(--ink); padding: 22px; color: var(--ink); }
-  html[data-theme="night"] .step { color: var(--ground-ink); }
+  .step { border: 4px solid var(--ink); box-shadow: 0 8px 0 var(--ink); padding: 22px; }
   .step:nth-child(1) { background: var(--panel-a); } .step:nth-child(2) { background: var(--panel-b); } .step:nth-child(3) { background: var(--panel-c); }
-  .step h3 { font-family: var(--px); font-weight: 400; font-size: 18px; margin: 0 0 8px; }
+  .step h3 { font-size: 18px; margin: 0 0 8px; -webkit-text-stroke: 6px #000; }
   .step p { margin: 0; font-size: 16px; }
-  .scenery { position: absolute; bottom: 0; pointer-events: none; image-rendering: pixelated; }
-  .cactus { right: 2%; width: 120px; opacity: .95; }
-  .tower { left: -10px; width: 150px; opacity: .9; }
-  .ground.how { padding-bottom: 150px; }
+
+  /* ---------- desert-city scene (replaces the small decorations) ---------- */
+  .ground.how { padding-bottom: 0; }
+  .scene { position: relative; max-width: 1200px; margin: 28px auto 0; height: clamp(250px, 42vw, 470px); }
+  .prop { position: absolute; bottom: calc(var(--g) - 5px); }
+  .prop img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+  .prop::before { content: ""; position: absolute; left: -8%; right: -8%; bottom: -5px; height: 10px; background: rgba(10,26,60,.28); }
+  .prop.far { opacity: .55; bottom: calc(var(--g) + 4px); }
+  .prop.far img { filter: saturate(.6) brightness(.95); }
+  .prop.far::before { display: none; }
+  .tower { width: clamp(96px, 17vw, 190px); }
+  .tower.main { left: 9%; }
+  .tower.far { width: clamp(56px, 8vw, 92px); }
+  .tower.far.fa { left: 2%; } .tower.far.fb { left: 33%; } .tower.far.fc { right: 20%; }
+  .cactus.big { right: 7%; width: clamp(58px, 10vw, 118px); }
+  .cactus.mid { right: 17%; width: clamp(40px, 7vw, 82px); }
+  .cactus.sm1 { left: 47%; width: clamp(30px, 5vw, 58px); }
+  .cactus.sm2 { left: 54%; width: clamp(24px, 4vw, 46px); }
+  .beacon { position: absolute; left: 20.9%; top: 15.3%; width: 4.2%; aspect-ratio: 1; min-width: 5px; background: #ff3b5c; box-shadow: 0 0 0 3px rgba(255,59,92,.35); transform: translate(-50%,-50%); animation: blink 1.4s steps(1, end) infinite; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+  html[data-theme="night"] .prop:not(.far) img { filter: brightness(1.25) drop-shadow(0 0 14px rgba(122,92,255,.65)); }
+  html[data-theme="night"] .prop.far { opacity: .4; }
+  .floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--g); background-color: var(--floor); border-top: 6px solid var(--edge);
+    background-image: radial-gradient(circle at 20% 40%, rgba(10,26,60,.35) 2.5px, transparent 3px), radial-gradient(circle at 70% 70%, rgba(10,26,60,.25) 2px, transparent 2.5px);
+    background-size: 46px 30px, 31px 24px; }
 
   .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 22px; }
-  .b { border: 4px solid var(--ink); box-shadow: 0 8px 0 var(--ink); padding: 24px; color: var(--ink); }
-  html[data-theme="night"] .b { color: var(--ground-ink); }
-  .b h3 { font-family: var(--px); font-weight: 400; font-size: 19px; margin: 0 0 8px; }
+  .b { border: 4px solid var(--ink); box-shadow: 0 8px 0 var(--ink); padding: 24px; }
+  .b h3 { font-size: 19px; margin: 0 0 8px; -webkit-text-stroke: 6px #000; }
   .b p { margin: 0; }
   .b1 { grid-column: span 4; background: var(--panel-a); } .b2 { grid-column: span 2; background: var(--panel-b); }
   .b3 { grid-column: span 2; background: var(--panel-c); } .b4 { grid-column: span 4; background: var(--panel-a); }
 
   .mail .wrap { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; }
-  .mail p { margin: 0 0 22px; max-width: 30em; font-size: 18px; font-weight: 800; }
-  .mail .addr { display: block; margin-top: 16px; font-weight: 800; color: var(--ground-dim); word-break: break-all; }
+  .mail p { margin: 0 0 22px; max-width: 30em; font-size: 18px; }
+  .mail .addr { display: block; margin-top: 16px; word-break: break-all; }
   .mail .ufo-big { width: 220px; image-rendering: pixelated; animation: hover 6s ease-in-out infinite; }
 
-  footer { background: var(--foot); color: var(--foot-ink); text-align: center; padding: 28px 0 40px; font-size: 14px; border-top: 8px solid var(--edge); }
-  footer p { margin: 4px 0; }
+  footer { background: var(--foot); text-align: center; padding: 28px 0 40px; font-size: 14px; border-top: 8px solid var(--edge); }
+  footer p { margin: 4px 0; -webkit-text-stroke: 3px #000; }
   footer .px { font-size: 13px; }
   .sr { position: absolute; left: -9999px; }
 
@@ -143,12 +172,12 @@
     .b1, .b2, .b3, .b4 { grid-column: span 6; }
     .mail .wrap { grid-template-columns: 1fr; }
     .mail .ufo-big { width: 140px; }
-    .tower { display: none; }
-    .cactus { width: 90px; }
+    .tower.far.fb, .cactus.sm2 { display: none; }
     h1 { -webkit-text-stroke: 7px var(--ink); }
+    h2 { -webkit-text-stroke: 6px #000; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .clouds, .tile, .ufo, .ufo-big { animation: none !important; }
+    .clouds, .tile, .ufo, .ufo-big, .beacon { animation: none !important; }
     html { scroll-behavior: auto; }
   }
 </style>
@@ -186,7 +215,7 @@
       <p class="lead" data-i18n="lead">A dino rides a paper plane over the city. Tap to flap, dodge everything, beat your best score.</p>
       <div class="btns">
         <a class="btn go" href="https://play.google.com/store/apps/details?id=com.heribertus.rexflaps404">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l9.1-9.7-9.1-9.7zm10.2 10.9L4.9 22.2c.4.2.9.2 1.5-.1l11.5-6.6-4.1-2.3zm4.9-3.2l-4.9 2.8 4.9 2.8 2.4-1.4c.8-.5.8-1.7 0-2.2L18.7 10zM6.4 1.9c-.6-.3-1.1-.3-1.5-.1l8.9 9.1 4.1-2.3L6.4 1.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l9.1-9.7-9.1-9.7zm10.2 10.9L4.9 22.2c.4.2.9.2 1.5-.1l11.5-6.6-4.1-2.3zm4.9-3.2l-4.9 2.8 4.9 2.8 2.4-1.4c.8-.5.8-1.7 0-2.2L18.7 10zM6.4 1.9c-.6-.3-1.1-.3-1.5-.1l8.9 9.1 4.1-2.3L6.4 1.9z"/></svg>
           <span data-i18n="play">Get it on Google Play</span>
         </a>
         <a class="btn alt" href="#how" data-i18n="howbtn">How to play</a>
@@ -211,8 +240,18 @@
       <div class="step"><h3 data-i18n="s3t">Beat your best</h3><p data-i18n="s3p">Your best score is saved. One more try is always quick.</p></div>
     </div>
   </div>
-  <img class="scenery tower" src="assets/building.webp" alt="" width="150">
-  <img class="scenery cactus" src="assets/cactus.webp" alt="" width="120">
+
+  <div class="scene" aria-hidden="true">
+    <div class="prop far tower far fa"><img src="assets/building.webp" alt=""></div>
+    <div class="prop far tower far fb"><img src="assets/building.webp" alt=""></div>
+    <div class="prop far tower far fc"><img src="assets/building.webp" alt=""></div>
+    <div class="prop tower main"><img src="assets/building.webp" alt=""><span class="beacon"></span></div>
+    <div class="prop cactus sm1"><img src="assets/cactus.webp" alt=""></div>
+    <div class="prop cactus sm2"><img src="assets/cactus.webp" alt=""></div>
+    <div class="prop cactus mid"><img src="assets/cactus.webp" alt=""></div>
+    <div class="prop cactus big"><img src="assets/cactus.webp" alt=""></div>
+    <div class="floor"></div>
+  </div>
 </section>
 
 <section class="ground alt">
